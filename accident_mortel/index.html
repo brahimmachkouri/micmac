@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diaporama d'énigme</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+        }
+        .container {
+            position: relative;
+            width: 90vw;
+            max-width: 600px;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .nav {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            background: transparent;
+        }
+        .left { left: 0; }
+        .right { right: 0; }
+        .button {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="card" src="recto1.png" alt="Carte">
+        <div class="nav left" onclick="prevCard()"></div>
+        <div class="nav right" onclick="nextCard()"></div>
+        <button class="button" onclick="flipCard()">Retourner</button>
+    </div>
+    
+    <script>
+        let index = 1;
+        let side = 'recto';
+        const totalCards = 5;
+        const imgElement = document.getElementById('card');
+
+        function updateImage() {
+            imgElement.src = `${side}${index}.png`;
+        }
+
+        function nextCard() {
+            if (index < totalCards) {
+                index++;
+                side = 'recto';
+                updateImage();
+            }
+        }
+
+        function prevCard() {
+            if (index > 1) {
+                index--;
+                side = 'recto';
+                updateImage();
+            }
+        }
+
+        function flipCard() {
+            side = (side === 'recto') ? 'verso' : 'recto';
+            updateImage();
+        }
+    </script>
+</body>
+</html>
